@@ -188,11 +188,20 @@ export class TodoItem extends LitElement {
       this.handleCancel();
     }
   }
+  formatDate(dateInput) {
+  if (!dateInput) {
+    return 'No Date';
+  }
+  const date = new Date(dateInput);
+  const options = { month: 'short', day: '2-digit' };
+  return date.toLocaleDateString(undefined, options);
+}
 
   render() {
     if (this.isEditing) {
+      const formattedDate = this.formatDate(this.todo.dateCreated);
       return html`
-        <div class="todo-item">
+        <div class="todo-item" data-date="${formattedDate}">
           <input
             class="edit-input"
             type="text"
@@ -210,7 +219,7 @@ export class TodoItem extends LitElement {
     }
 
     return html`
-      <div class="todo-item">
+      <div class="todo-item" >
         <input
           type="checkbox"
           class="checkbox"

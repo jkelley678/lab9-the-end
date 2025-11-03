@@ -57,6 +57,18 @@ export class TodoForm extends LitElement {
       background: #ccc;
       cursor: not-allowed;
     }
+    #order-select{
+      padding: 12px 24px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 400;
+      width:100px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
   `;
 
   constructor() {
@@ -94,6 +106,11 @@ export class TodoForm extends LitElement {
           aria-label="New todo"
           autofocus
         />
+        <select id="order-select">
+          <option value="Sort-by">Sort by</option>
+          <option value="Due-date" selected>Due Date</option>
+          <option value="Importance">Importance</option>
+        </select>
         <button type="submit" ?disabled=${!this.inputValue.trim()}>
           Add
         </button>

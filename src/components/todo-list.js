@@ -21,7 +21,7 @@ export class TodoList extends LitElement {
       font-size: 18px;
     }
 
-    .empty-icon {
+    empty-icon {
       font-size: 48px;
       margin-bottom: 16px;
     }
@@ -60,7 +60,7 @@ export class TodoList extends LitElement {
     if (this.todos.length === 0) {
       return html`
         <div class="empty-state">
-          <div class="empty-icon">📝</div>
+          <empty-icon>📝</empty-icon>
           <p>No todos yet. Add one above!</p>
         </div>
       `;

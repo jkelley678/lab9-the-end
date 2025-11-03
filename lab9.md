@@ -60,3 +60,12 @@ Submit your GitHub repository URL that demonstrates with a README that clearly p
 
 
 Good luck! Remember to focus on process more than code. The lab is also intentionally vague as your final warm-up before we wrestle with **REAL** uncertainty!  You are free to ask me for advice about ideas you have, things you might do to show ownership, etc. Who knows that might be an actual learning outcome.
+
+
+## Issues
+
+- In every components/....js doc, all of the styling is within each file. My hope is to seperate the styling into its own .css file. 
+- There aren't and JSDoc comments; will add those for functions. 
+- When running the program, it seems that the clearing aspect doesn't properly work. 
+- Focus on MVC, making sure things are seperated properly.
+- Features: Due date that ranks the todo list based on urgency. Maybe also an importance level

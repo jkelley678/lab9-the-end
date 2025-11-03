@@ -107,7 +107,34 @@ export class TodoItem extends LitElement {
     .cancel-btn:hover {
       background: #616161;
     }
+    #model-select  {
+        border-radius:5px;
+    }
+    #model-select option[value="high-value"] {
+      color:red;
+      background-color: red;
+    }
+    #model-select option[value="medium-value"] {
+      color:orange;
+      background-color: orange;
+    }
+    #model-select option[value="low-value"] {
+      color:yellow;
+      background-color: yellow;
+    }
+    #model-select option[value="high-value"]:displayed{
+      color:red;
+      background-color: red;
+    }
+
+
   `;
+  /*<select id="model-select">
+            <option id="severity-value" selected>Value</option>
+            <option id="high-value">High</option>
+            <option id="medium-value">Medium</option>
+            <option id="low-value">Low</option>
+          </select>*/
 
   constructor() {
     super();
@@ -194,7 +221,13 @@ export class TodoItem extends LitElement {
         <span class="todo-text ${this.todo.completed ? 'completed' : ''}">
           ${this.todo.text}
         </span>
-        <div class="button-group">
+        <button-group>
+          <select id="model-select">
+            <option value="severity-value" selected>Value</option>
+            <option value="high-value">High</option>
+            <option value="medium-value">Medium</option>
+            <option value="low-value">Low</option>
+          </select>
           <button
             class="edit-btn"
             @click=${this.handleEdit}
@@ -208,7 +241,7 @@ export class TodoItem extends LitElement {
             aria-label="Delete todo">
             Delete
           </button>
-        </div>
+        </button-group>
       </div>
     `;
   }

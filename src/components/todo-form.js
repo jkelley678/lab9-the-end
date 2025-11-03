@@ -28,6 +28,11 @@ export class TodoForm extends LitElement {
       outline: none;
       transition: border-color 0.3s;
     }
+    #date-input{
+      width:30px;
+    }
+
+    
 
     input:focus {
       border-color: #667eea;
@@ -98,7 +103,7 @@ export class TodoForm extends LitElement {
   render() {
     return html`
       <form @submit=${this.handleSubmit}>
-        <input
+        <input 
           type="text"
           placeholder="What needs to be done?"
           .value=${this.inputValue}
@@ -106,6 +111,7 @@ export class TodoForm extends LitElement {
           aria-label="New todo"
           autofocus
         />
+        <input type="text" id="date-input" placeholder="mm/dd" >
         <select id="order-select">
           <option value="Sort-by">Sort by</option>
           <option value="Due-date" selected>Due Date</option>

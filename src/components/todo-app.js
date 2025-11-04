@@ -149,6 +149,7 @@ export class TodoApp extends LitElement {
   handleClearCompleted() {
     if (confirm('Clear all completed todos?')) {
       this.model.clearCompleted();
+      this.model.uncheckAllRemaining();
     }
   }
   handleSortSelect(){

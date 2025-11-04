@@ -85,6 +85,11 @@ export class TodoModel {
     this.save();
     this.notify();
   }
+  uncheckAllRemaining() {
+    this.todos.forEach(t => {t.completed = false;});
+    this.save(); 
+    this.notify(); 
+  }
 
   /**
    * Clear all todos

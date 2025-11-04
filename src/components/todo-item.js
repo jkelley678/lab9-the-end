@@ -8,7 +8,7 @@ export class TodoItem extends LitElement {
     todo: { type: Object },
     isEditing: { state: true },
     editValue: { state: true },
-    dueDate: { state: true }
+
 
   };
 
@@ -50,6 +50,16 @@ export class TodoItem extends LitElement {
       text-decoration: line-through;
       color: #999;
     }
+      #date-input {
+      flex: 1;
+      padding: 8px 6px;
+      font-size: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      outline: none;
+      width:50px;
+    }
+
 
     .edit-input {
       flex: 1;
@@ -137,7 +147,7 @@ export class TodoItem extends LitElement {
     super();
     this.isEditing = false;
     this.editValue = '';
-    this.dueDate = '';
+
   }
 
   handleToggle() {
@@ -161,7 +171,7 @@ export class TodoItem extends LitElement {
   handleEdit() {
     this.isEditing = true;
     this.editValue = this.todo.text;
-    this.dueDate = this.todo.dueDate;
+
   }
 
   handleSave() {
@@ -220,9 +230,8 @@ export class TodoItem extends LitElement {
         <span class="todo-text ${this.todo.completed ? 'completed' : ''}">
           ${this.todo.text}
         </span>
-        <span class="date-text ${this.todo.completed ? 'completed' : ''}">
-        ${this.todo.dueDate}
-        </span>
+
+        <input type="date" id="date-input" placeholder="mm/dd" >
         <button-group>
           <select id="model-select">
             <option value="severity-value" selected>Value</option>

@@ -28,11 +28,7 @@ export class TodoForm extends LitElement {
       outline: none;
       transition: border-color 0.3s;
     }
-    #date-input{
-      width:30px;
-    }
 
-    
 
     input:focus {
       border-color: #667eea;
@@ -111,8 +107,7 @@ export class TodoForm extends LitElement {
           aria-label="New todo"
           autofocus
         />
-        
-        <input type="date" id="date-input" placeholder="mm/dd" >
+
         <select id="order-select">
           <option value="Sort-by">Sort by</option>
           <option value="Due-date" selected>Due Date</option>

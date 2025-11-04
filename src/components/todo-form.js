@@ -111,7 +111,8 @@ export class TodoForm extends LitElement {
           aria-label="New todo"
           autofocus
         />
-        <input type="text" id="date-input" placeholder="mm/dd" >
+        
+        <input type="date" id="date-input" placeholder="mm/dd" >
         <select id="order-select">
           <option value="Sort-by">Sort by</option>
           <option value="Due-date" selected>Due Date</option>

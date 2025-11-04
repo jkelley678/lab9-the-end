@@ -7,7 +7,9 @@ export class TodoItem extends LitElement {
   static properties = {
     todo: { type: Object },
     isEditing: { state: true },
-    editValue: { state: true }
+    editValue: { state: true },
+    dueDate: { state: true }
+
   };
 
   static styles = css`
@@ -135,6 +137,7 @@ export class TodoItem extends LitElement {
     super();
     this.isEditing = false;
     this.editValue = '';
+    this.dueDate = '';
   }
 
   handleToggle() {
@@ -158,6 +161,7 @@ export class TodoItem extends LitElement {
   handleEdit() {
     this.isEditing = true;
     this.editValue = this.todo.text;
+    this.dueDate = this.todo.dueDate;
   }
 
   handleSave() {
@@ -187,7 +191,7 @@ export class TodoItem extends LitElement {
   render() {
     if (this.isEditing) {
       return html`
-        <div class="todo-item" data-date="">
+        <div class="todo-item" >
           <input
             class="edit-input"
             type="text"
@@ -215,6 +219,9 @@ export class TodoItem extends LitElement {
         />
         <span class="todo-text ${this.todo.completed ? 'completed' : ''}">
           ${this.todo.text}
+        </span>
+        <span class="date-text ${this.todo.completed ? 'completed' : ''}">
+        ${this.todo.dueDate}
         </span>
         <button-group>
           <select id="model-select">

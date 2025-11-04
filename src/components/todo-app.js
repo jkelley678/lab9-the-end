@@ -151,6 +151,10 @@ export class TodoApp extends LitElement {
       this.model.clearCompleted();
     }
   }
+  handleSortSelect(){
+    
+
+  }
 
   handleClearAll() {
     if (confirm('Clear ALL todos? This cannot be undone.')) {

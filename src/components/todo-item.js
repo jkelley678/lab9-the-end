@@ -197,6 +197,13 @@ export class TodoItem extends LitElement {
       this.handleCancel();
     }
   }
+  handleDateChange(e) {
+  this.dispatchEvent(new CustomEvent('update-due-date', {
+    detail: { id: this.todo.id, dueDate: e.target.value },
+    bubbles: true,
+    composed: true
+  }));
+}
 
   render() {
     if (this.isEditing) {
@@ -231,7 +238,8 @@ export class TodoItem extends LitElement {
           ${this.todo.text}
         </span>
 
-        <input type="date" id="date-input" placeholder="mm/dd" >
+        <input type="date" id="date-input" placeholder="mm/dd" .value=${this.todo.dueDate || ''}
+          @change=${this.handleDateChange}>
         <button-group>
           <select id="model-select">
             <option value="severity-value" selected>Value</option>

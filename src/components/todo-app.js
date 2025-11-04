@@ -152,10 +152,9 @@ export class TodoApp extends LitElement {
       this.model.uncheckAllRemaining();
     }
   }
-  handleSortSelect(){
-    
-
-  }
+  handleUpdateDueDate(e) {
+    this.model.updateDueDate(e.detail.id, e.detail.dueDate);
+}
 
   handleClearAll() {
     if (confirm('Clear ALL todos? This cannot be undone.')) {
@@ -192,7 +191,8 @@ export class TodoApp extends LitElement {
           .todos=${this.todos}
           @toggle-todo=${this.handleToggleTodo}
           @delete-todo=${this.handleDeleteTodo}
-          @update-todo=${this.handleUpdateTodo}>
+          @update-todo=${this.handleUpdateTodo}
+          @update-due-date=${this.handleUpdateDueDate}>
         </todo-list>
 
         <div class="actions">

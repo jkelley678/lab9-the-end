@@ -36,7 +36,8 @@ export class TodoModel {
       id: this.nextId++,
       text: text.trim(),
       completed: false,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      dueDate: ''
     };
 
     this.todos.push(todo);
@@ -76,6 +77,15 @@ export class TodoModel {
       this.notify();
     }
   }
+  
+  updateDueDate(id, dueDate) {
+  const todo = this.todos.find(t => t.id === id);
+  if (todo) {
+    todo.dueDate = dueDate;
+    this.save();
+    this.notify();
+  }
+}
 
   /**
    * Clear all completed todos

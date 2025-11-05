@@ -121,20 +121,25 @@ export class TodoItem extends LitElement {
     }
     #model-select  {
         border-radius:5px;
+        padding: 6px 10px;
     }
     #model-select option[value="high-value"] {
       color:red;
       background-color: red;
     }
-    #model-select option[value="medium-value"] {
+    option[value="medium-value"] {
       color:orange;
       background-color: orange;
     }
-    #model-select option[value="low-value"] {
+    option[value="low-value"] {
       color:yellow;
       background-color: yellow;
     }
-    #model-select option[value="high-value"]:displayed{
+      option[value="low-value"]:displayed {
+      color:yellow;
+      background-color: yellow;
+    }
+    option[value="high-value"]{
       color:red;
       background-color: red;
     }
@@ -243,9 +248,9 @@ export class TodoItem extends LitElement {
         <button-group>
           <select id="model-select">
             <option value="severity-value" selected>Value</option>
-            <option value="high-value">High</option>
-            <option value="medium-value">Medium</option>
-            <option value="low-value">Low</option>
+            <option value="high-value">🔴</option>
+            <option value="medium-value">🟠</option>
+            <option value="low-value">🟡</option>
           </select>
           <button
             class="edit-btn"

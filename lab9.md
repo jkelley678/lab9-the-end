@@ -69,3 +69,14 @@ Good luck! Remember to focus on process more than code. The lab is also intentio
 - When running the program, it seems that the clearing aspect doesn't properly work. 
 - Focus on MVC, making sure things are seperated properly.
 - Features: Due date that ranks the todo list based on urgency. Maybe also an importance level
+
+## Project Structure
+
+|-src
+|
+|-tests
+|-.gitignore
+|-lab9.md
+|-package-lock.json
+|-package.json
+|-vite.config.js

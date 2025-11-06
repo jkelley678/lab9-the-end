@@ -86,6 +86,14 @@ export class TodoModel {
     this.notify();
   }
 }
+updateImportance(id, importance) {
+  const todo = this.todos.find(t => t.id === id);
+  if (todo) {
+    todo.importance = importance;
+    this.save();
+    this.notify();
+  }
+}
 
   /**
    * Clear all completed todos

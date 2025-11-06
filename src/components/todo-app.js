@@ -155,6 +155,9 @@ export class TodoApp extends LitElement {
   handleUpdateDueDate(e) {
     this.model.updateDueDate(e.detail.id, e.detail.dueDate);
 }
+  handleUpdateImportance(e) {
+    this.model.updateImportance(e.detail.id, e.detail.importance);
+  }
 
   handleClearAll() {
     if (confirm('Clear ALL todos? This cannot be undone.')) {
@@ -192,7 +195,8 @@ export class TodoApp extends LitElement {
           @toggle-todo=${this.handleToggleTodo}
           @delete-todo=${this.handleDeleteTodo}
           @update-todo=${this.handleUpdateTodo}
-          @update-due-date=${this.handleUpdateDueDate}>
+          @update-due-date=${this.handleUpdateDueDate}
+          @update-importance=${this.handleUpdateImportance}>
         </todo-list>
 
         <div class="actions">

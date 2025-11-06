@@ -209,6 +209,13 @@ export class TodoItem extends LitElement {
     composed: true
   }));
 }
+handleImportanceChange(e) {
+  this.dispatchEvent(new CustomEvent('update-importance', {
+    detail: { id: this.todo.id, importance: e.target.value },
+    bubbles: true,
+    composed: true
+  }));
+}
 
   render() {
     if (this.isEditing) {
@@ -246,7 +253,8 @@ export class TodoItem extends LitElement {
         <input type="date" id="date-input" placeholder="mm/dd" .value=${this.todo.dueDate || ''}
           @change=${this.handleDateChange}>
         <button-group>
-          <select id="model-select">
+          <select id="model-select" .value=${this.todo.importance || 'severity-value'}
+          @change=${this.handleImportanceChange}>
             <option value="severity-value" selected>Value</option>
             <option value="high-value">🔴</option>
             <option value="medium-value">🟠</option>

@@ -71,12 +71,24 @@ Good luck! Remember to focus on process more than code. The lab is also intentio
 - Features: Due date that ranks the todo list based on urgency. Maybe also an importance level
 
 ## Project Structure
-
-|-src
-|
+```
+|-src  
+| |-components 
+| | |-todo-app.js
+| | |-todo-form.js
+| | |-todo-item.js
+| | |_todo-list.js
+| |-models
+| | |_todo-model.js
+| |-services
+| | |_storage-service.js
+| |-index.html
+| |_styles.css
 |-tests
+| |_todo-model.test.js
 |-.gitignore
 |-lab9.md
 |-package-lock.json
 |-package.json
 |-vite.config.js
+```

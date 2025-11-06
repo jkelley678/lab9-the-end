@@ -37,7 +37,8 @@ export class TodoModel {
       text: text.trim(),
       completed: false,
       createdAt: new Date().toISOString(),
-      dueDate: ''
+      dueDate: '',
+      importance: 'severity-value'
     };
 
     this.todos.push(todo);

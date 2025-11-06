@@ -2,6 +2,19 @@ import { LitElement, html, css } from 'lit';
 
 /**
  * TodoItem - Individual todo item component
+ * 
+ * @class TodoItem
+ * @extends {LitElement}
+ * 
+ * @property {Object} todo - The todo object to display
+ * @property {number} todo.id - Unique identifier for the todo
+ * @property {string} todo.text - The todo text content
+ * @property {boolean} todo.completed - Whether the todo is completed
+ * @property {string} todo.dueDate - The due date for the todo
+ * @property {string} todo.importance - The importance level of the todo
+ * @property {boolean} isEditing - Whether the item is currently being edited
+ * @property {string} editValue - The value being edited
+ * 
  */
 export class TodoItem extends LitElement {
   static properties = {
@@ -147,14 +160,22 @@ export class TodoItem extends LitElement {
 
   `;
 
-
+  /**
+   * Creates an instance of TodoItem
+   * Initializes editing state
+   * 
+   * @constructor
+   */
   constructor() {
     super();
     this.isEditing = false;
     this.editValue = '';
 
   }
-
+  /**
+   * Handles toggling the completion status of the todo
+   * Dispatches toggle-todo event
+   */
   handleToggle() {
     this.dispatchEvent(new CustomEvent('toggle-todo', {
       detail: { id: this.todo.id },
@@ -162,7 +183,10 @@ export class TodoItem extends LitElement {
       composed: true
     }));
   }
-
+  /**
+   * Handles deleting the todo
+   * Shows confirmation dialog and dispatches delete-todo event
+   */
   handleDelete() {
     if (confirm('Delete this todo?')) {
       this.dispatchEvent(new CustomEvent('delete-todo', {
@@ -172,13 +196,19 @@ export class TodoItem extends LitElement {
       }));
     }
   }
-
+  /**
+   * Enables edit mode for the todo item
+   * Sets isEditing to true and populates editValue with current text
+   */
   handleEdit() {
     this.isEditing = true;
     this.editValue = this.todo.text;
 
   }
-
+  /**
+   * Saves the edited todo text
+   * Dispatches update-todo event if editValue is valid
+   */
   handleSave() {
     if (this.editValue.trim()) {
       this.dispatchEvent(new CustomEvent('update-todo', {
@@ -189,12 +219,20 @@ export class TodoItem extends LitElement {
       this.isEditing = false;
     }
   }
-
+  /**
+   * Cancels editing and reverts to display mode
+   * Resets isEditing and clears editValue
+   */
   handleCancel() {
     this.isEditing = false;
     this.editValue = '';
   }
-
+  /**
+   * Handles keyboard shortcuts while editing
+   * Enter key saves, Escape key cancels
+   * 
+   * @param {KeyboardEvent} e - The keyboard event
+   */
   handleKeyDown(e) {
     if (e.key === 'Enter') {
       this.handleSave();
@@ -202,6 +240,12 @@ export class TodoItem extends LitElement {
       this.handleCancel();
     }
   }
+  /**
+   * Handles changes to the due date input
+   * Dispatches update-due-date event
+   * 
+   * @param {Event} e - The change event from the date input
+   */
   handleDateChange(e) {
   this.dispatchEvent(new CustomEvent('update-due-date', {
     detail: { id: this.todo.id, dueDate: e.target.value },
@@ -209,6 +253,12 @@ export class TodoItem extends LitElement {
     composed: true
   }));
 }
+/**
+   * Handles changes to the importance select dropdown
+   * Dispatches update-importance event
+   * 
+   * @param {Event} e - The change event from the select input
+   */
 handleImportanceChange(e) {
   this.dispatchEvent(new CustomEvent('update-importance', {
     detail: { id: this.todo.id, importance: e.target.value },
@@ -216,7 +266,12 @@ handleImportanceChange(e) {
     composed: true
   }));
 }
-
+  /**
+   * Renders the component template
+   * Shows either edit mode or display mode based on isEditing state
+   * 
+   * @returns {TemplateResult} The lit-html template
+   */
   render() {
     if (this.isEditing) {
       return html`

@@ -117,7 +117,12 @@ export class TodoApp extends LitElement {
       font-size: 12px;
     }
   `;
-
+  /**
+   * Creates an instance of TodoApp
+   * Initializes storage service, model, and subscribes to model changes
+   * 
+   * @constructor
+   */
   constructor() {
     super();
     this.storageService = new StorageService();
@@ -129,42 +134,78 @@ export class TodoApp extends LitElement {
       this.todos = [...this.model.todos];
     });
   }
-
+  /**
+   * Handles the add-todo event from the form
+   * 
+   * @param {CustomEvent} e - Event containing the new todo text in detail.text
+   */
   handleAddTodo(e) {
     this.model.addTodo(e.detail.text);
   }
-
+  /**
+   * Handles the toggle-todo event to mark a todo as complete/incomplete
+   * 
+   * @param {CustomEvent} e - Event containing the todo id in detail.id
+   */
   handleToggleTodo(e) {
     this.model.toggleComplete(e.detail.id);
   }
-
+  /**
+   * Handles the delete-todo event to remove a todo
+   * 
+   * @param {CustomEvent} e - Event containing the todo id in detail.id
+   */
   handleDeleteTodo(e) {
     this.model.deleteTodo(e.detail.id);
   }
-
+  /**
+   * Handles the update-todo event to modify a todo's text
+   * 
+   * @param {CustomEvent} e - Event containing the todo id and new text in detail
+   */
   handleUpdateTodo(e) {
     this.model.updateTodo(e.detail.id, e.detail.text);
   }
-
+  /**
+   * Handles clearing all completed todos
+   * Shows confirmation dialog and unchecks all remaining todos
+   */
   handleClearCompleted() {
     if (confirm('Clear all completed todos?')) {
       this.model.clearCompleted();
       this.model.uncheckAllRemaining();
     }
   }
+  /**
+   * Handles the update-due-date event to set a todo's due date
+   * 
+   * @param {CustomEvent} e - Event containing the todo id and due date in detail
+   */
   handleUpdateDueDate(e) {
     this.model.updateDueDate(e.detail.id, e.detail.dueDate);
-}
+  }
+  /**
+   * Handles the update-importance event to set a todo's importance level
+   * 
+   * @param {CustomEvent} e - Event containing the todo id and importance level in detail
+   */
   handleUpdateImportance(e) {
     this.model.updateImportance(e.detail.id, e.detail.importance);
   }
-
+  /**
+   * Handles clearing all todos
+   * Shows confirmation dialog before deleting all items
+   */
   handleClearAll() {
     if (confirm('Clear ALL todos? This cannot be undone.')) {
       this.model.clearAll();
     }
   }
-
+  /**
+   * Renders the component template
+   * 
+   * @returns {TemplateResult} The lit-html template
+   */
   render() {
     return html`
       <div class="app-container">

@@ -71,12 +71,22 @@ export class TodoForm extends LitElement {
       transition: background 0.3s;
     }
   `;
-
+  /**
+   * Creates an instance of TodoForm
+   * Initializes the input value to empty string
+   * 
+   * @constructor
+   */
   constructor() {
     super();
     this.inputValue = '';
   }
-
+  /**
+   * Handles form submission
+   * Prevents default form behavior and dispatches add-todo event if input is valid
+   * 
+   * @param {Event} e - The form submit event
+   */
   handleSubmit(e) {
     e.preventDefault();
     const text = this.inputValue.trim();
@@ -91,11 +101,20 @@ export class TodoForm extends LitElement {
       this.inputValue = '';
     }
   }
-
+  /**
+   * Handles input field changes
+   * Updates the inputValue property as user types
+   * 
+   * @param {InputEvent} e - The input event
+   */
   handleInput(e) {
     this.inputValue = e.target.value;
   }
-
+  /**
+   * Renders the component template
+   * 
+   * @returns {TemplateResult} The lit-html template
+   */
   render() {
     return html`
       <form @submit=${this.handleSubmit}>

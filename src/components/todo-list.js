@@ -4,6 +4,11 @@ import './todo-item.js';
 
 /**
  * TodoList - Displays a list of todos
+ * 
+ * @class TodoList
+ * @extends {LitElement}
+ * 
+ * @property {Array<Object>} todos - Array of todo objects to display
  */
 export class TodoList extends LitElement {
   static properties = {
@@ -51,12 +56,22 @@ export class TodoList extends LitElement {
       background: rgba(255, 255, 255, 0.5);
     }
   `;
-
+  /**
+   * Creates an instance of TodoList
+   * Initializes todos array
+   * 
+   * @constructor
+   */
   constructor() {
     super();
     this.todos = [];
   }
-
+  /**
+   * Renders the component template
+   * Shows empty state if no todos, otherwise displays list of todo items
+   * 
+   * @returns {TemplateResult} The lit-html template
+   */
   render() {
     if (this.todos.length === 0) {
       return html`

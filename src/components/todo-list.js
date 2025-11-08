@@ -56,6 +56,7 @@ export class TodoList extends LitElement {
       background: rgba(255, 255, 255, 0.5);
     }
   `;
+  
   /**
    * Creates an instance of TodoList
    * Initializes todos array

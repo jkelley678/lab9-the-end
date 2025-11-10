@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>components/todo-item.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="StorageService.html">StorageService</a><ul class='methods'><li data-type='method'><a href="StorageService.html#clear">clear</a></li><li data-type='method'><a href="StorageService.html#load">load</a></li><li data-type='method'><a href="StorageService.html#remove">remove</a></li><li data-type='method'><a href="StorageService.html#save">save</a></li></ul></li><li><a href="TodoApp.html">TodoApp</a><ul class='methods'><li data-type='method'><a href="TodoApp.html#handleAddTodo">handleAddTodo</a></li><li data-type='method'><a href="TodoApp.html#handleClearAll">handleClearAll</a></li><li data-type='method'><a href="TodoApp.html#handleClearCompleted">handleClearCompleted</a></li><li data-type='method'><a href="TodoApp.html#handleDeleteTodo">handleDeleteTodo</a></li><li data-type='method'><a href="TodoApp.html#handleToggleTodo">handleToggleTodo</a></li><li data-type='method'><a href="TodoApp.html#handleUpdateDueDate">handleUpdateDueDate</a></li><li data-type='method'><a href="TodoApp.html#handleUpdateImportance">handleUpdateImportance</a></li><li data-type='method'><a href="TodoApp.html#handleUpdateTodo">handleUpdateTodo</a></li><li data-type='method'><a href="TodoApp.html#render">render</a></li></ul></li><li><a href="TodoForm.html">TodoForm</a><ul class='methods'><li data-type='method'><a href="TodoForm.html#handleInput">handleInput</a></li><li data-type='method'><a href="TodoForm.html#handleSubmit">handleSubmit</a></li><li data-type='method'><a href="TodoForm.html#render">render</a></li></ul></li><li><a href="TodoItem.html">TodoItem</a><ul class='methods'><li data-type='method'><a href="TodoItem.html#handleCancel">handleCancel</a></li><li data-type='method'><a href="TodoItem.html#handleDateChange">handleDateChange</a></li><li data-type='method'><a href="TodoItem.html#handleDelete">handleDelete</a></li><li data-type='method'><a href="TodoItem.html#handleEdit">handleEdit</a></li><li data-type='method'><a href="TodoItem.html#handleImportanceChange">handleImportanceChange</a></li><li data-type='method'><a href="TodoItem.html#handleKeyDown">handleKeyDown</a></li><li data-type='method'><a href="TodoItem.html#handleSave">handleSave</a></li><li data-type='method'><a href="TodoItem.html#handleToggle">handleToggle</a></li><li data-type='method'><a href="TodoItem.html#render">render</a></li></ul></li><li><a href="TodoItem_TodoItem.html">TodoItem</a></li><li><a href="TodoList.html">TodoList</a><ul class='methods'><li data-type='method'><a href="TodoList.html#render">render</a></li></ul></li><li><a href="TodoList_TodoList.html">TodoList</a></li><li><a href="TodoModel.html">TodoModel</a><ul class='methods'><li data-type='method'><a href="TodoModel.html#addTodo">addTodo</a></li><li data-type='method'><a href="TodoModel.html#clearAll">clearAll</a></li><li data-type='method'><a href="TodoModel.html#clearCompleted">clearCompleted</a></li><li data-type='method'><a href="TodoModel.html#deleteTodo">deleteTodo</a></li><li data-type='method'><a href="TodoModel.html#notify">notify</a></li><li data-type='method'><a href="TodoModel.html#save">save</a></li><li data-type='method'><a href="TodoModel.html#subscribe">subscribe</a></li><li data-type='method'><a href="TodoModel.html#toggleComplete">toggleComplete</a></li><li data-type='method'><a href="TodoModel.html#uncheckAllRemaining">uncheckAllRemaining</a></li><li data-type='method'><a href="TodoModel.html#updateDueDate">updateDueDate</a></li><li data-type='method'><a href="TodoModel.html#updateImportance">updateImportance</a></li><li data-type='method'><a href="TodoModel.html#updateTodo">updateTodo</a></li></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">components/todo-item.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { LitElement, html, css } from 'lit';
+
+/**
+ * TodoItem - Individual todo item component
+ * 
+ * @class TodoItem
+ * @extends {LitElement}
+ * 
+ * @property {Object} todo - The todo object to display
+ * @property {number} todo.id - Unique identifier for the todo
+ * @property {string} todo.text - The todo text content
+ * @property {boolean} todo.completed - Whether the todo is completed
+ * @property {string} todo.dueDate - The due date for the todo
+ * @property {string} todo.importance - The importance level of the todo
+ * @property {boolean} isEditing - Whether the item is currently being edited
+ * @property {string} editValue - The value being edited
+ * 
+ */
+export class TodoItem extends LitElement {
+  static properties = {
+    todo: { type: Object },
+    isEditing: { state: true },
+    editValue: { state: true },
+
+
+  };
+
+  static styles = css`
+    :host {
+      display: block;
+    }
+
+    .todo-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: white;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .todo-item:hover {
+      transform: translateX(4px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .todo-text {
+      flex: 1;
+      font-size: 16px;
+      color: #333;
+      word-break: break-word;
+    }
+
+    .todo-text.completed {
+      text-decoration: line-through;
+      color: #999;
+    }
+      #date-input {
+      flex: 1;
+      padding: 8px 6px;
+      font-size: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      outline: none;
+      width:50px;
+    }
+
+
+    .edit-input {
+      flex: 1;
+      padding: 8px;
+      font-size: 16px;
+      border: 2px solid #667eea;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    button {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    .edit-btn {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .edit-btn:hover {
+      background: #45a049;
+    }
+
+    .delete-btn {
+      background: #f44336;
+      color: white;
+    }
+
+    .delete-btn:hover {
+      background: #da190b;
+    }
+
+    .save-btn {
+      background: #2196F3;
+      color: white;
+    }
+
+    .save-btn:hover {
+      background: #0b7dda;
+    }
+
+    .cancel-btn {
+      background: #757575;
+      color: white;
+    }
+
+    .cancel-btn:hover {
+      background: #616161;
+    }
+    #model-select  {
+        border-radius:5px;
+        padding: 6px 10px;
+    }
+    #model-select option[value="high-value"] {
+      color:red;
+      background-color: red;
+    }
+    option[value="medium-value"] {
+      color:orange;
+      background-color: orange;
+    }
+    option[value="low-value"] {
+      color:yellow;
+      background-color: yellow;
+    }
+      option[value="low-value"]:displayed {
+      color:yellow;
+      background-color: yellow;
+    }
+    option[value="high-value"]{
+      color:red;
+      background-color: red;
+    }
+
+
+  `;
+
+  /**
+   * Creates an instance of TodoItem
+   * Initializes editing state
+   * 
+   * @constructor
+   */
+  constructor() {
+    super();
+    this.isEditing = false;
+    this.editValue = '';
+
+  }
+  /**
+   * Handles toggling the completion status of the todo
+   * Dispatches toggle-todo event
+   */
+  handleToggle() {
+    this.dispatchEvent(new CustomEvent('toggle-todo', {
+      detail: { id: this.todo.id },
+      bubbles: true,
+      composed: true
+    }));
+  }
+  /**
+   * Handles deleting the todo
+   * Shows confirmation dialog and dispatches delete-todo event
+   */
+  handleDelete() {
+    if (confirm('Delete this todo?')) {
+      this.dispatchEvent(new CustomEvent('delete-todo', {
+        detail: { id: this.todo.id },
+        bubbles: true,
+        composed: true
+      }));
+    }
+  }
+  /**
+   * Enables edit mode for the todo item
+   * Sets isEditing to true and populates editValue with current text
+   */
+  handleEdit() {
+    this.isEditing = true;
+    this.editValue = this.todo.text;
+
+  }
+  /**
+   * Saves the edited todo text
+   * Dispatches update-todo event if editValue is valid
+   */
+  handleSave() {
+    if (this.editValue.trim()) {
+      this.dispatchEvent(new CustomEvent('update-todo', {
+        detail: { id: this.todo.id, text: this.editValue },
+        bubbles: true,
+        composed: true
+      }));
+      this.isEditing = false;
+    }
+  }
+  /**
+   * Cancels editing and reverts to display mode
+   * Resets isEditing and clears editValue
+   */
+  handleCancel() {
+    this.isEditing = false;
+    this.editValue = '';
+  }
+  /**
+   * Handles keyboard shortcuts while editing
+   * Enter key saves, Escape key cancels
+   * 
+   * @param {KeyboardEvent} e - The keyboard event
+   */
+  handleKeyDown(e) {
+    if (e.key === 'Enter') {
+      this.handleSave();
+    } else if (e.key === 'Escape') {
+      this.handleCancel();
+    }
+  }
+  /**
+   * Handles changes to the due date input
+   * Dispatches update-due-date event
+   * 
+   * @param {Event} e - The change event from the date input
+   */
+  handleDateChange(e) {
+  this.dispatchEvent(new CustomEvent('update-due-date', {
+    detail: { id: this.todo.id, dueDate: e.target.value },
+    bubbles: true,
+    composed: true
+  }));
+}
+/**
+   * Handles changes to the importance select dropdown
+   * Dispatches update-importance event
+   * 
+   * @param {Event} e - The change event from the select input
+   */
+handleImportanceChange(e) {
+  this.dispatchEvent(new CustomEvent('update-importance', {
+    detail: { id: this.todo.id, importance: e.target.value },
+    bubbles: true,
+    composed: true
+  }));
+}
+  /**
+   * Renders the component template
+   * Shows either edit mode or display mode based on isEditing state
+   * 
+   * @returns {TemplateResult} The lit-html template
+   */
+  render() {
+    if (this.isEditing) {
+      return html`
+        &lt;div class="todo-item" >
+          &lt;input
+            class="edit-input"
+            type="text"
+            .value=${this.editValue}
+            @input=${(e) => this.editValue = e.target.value}
+            @keydown=${this.handleKeyDown}
+            autofocus
+          />
+          &lt;div class="button-group">
+            &lt;button class="save-btn" @click=${this.handleSave}>Save&lt;/button>
+            &lt;button class="cancel-btn" @click=${this.handleCancel}>Cancel&lt;/button>
+          &lt;/div>
+        &lt;/div>
+      `;
+    }
+
+    return html`
+      &lt;div class="todo-item" >
+        &lt;input
+          type="checkbox"
+          class="checkbox"
+          .checked=${this.todo.completed}
+          @change=${this.handleToggle}
+          aria-label="Toggle todo"
+        />
+        &lt;span class="todo-text ${this.todo.completed ? 'completed' : ''}">
+          ${this.todo.text}
+        &lt;/span>
+
+        &lt;input type="date" id="date-input" placeholder="mm/dd" .value=${this.todo.dueDate || ''}
+          @change=${this.handleDateChange}>
+        &lt;button-group>
+          &lt;select id="model-select" .value=${this.todo.importance || 'severity-value'}
+          @change=${this.handleImportanceChange}>
+            &lt;option value="severity-value" selected>Value&lt;/option>
+            &lt;option value="high-value">🔴&lt;/option>
+            &lt;option value="medium-value">🟠&lt;/option>
+            &lt;option value="low-value">🟡&lt;/option>
+          &lt;/select>
+          &lt;button
+            class="edit-btn"
+            @click=${this.handleEdit}
+            ?disabled=${this.todo.completed}
+            aria-label="Edit todo">
+            Edit
+          &lt;/button>
+          &lt;button
+            class="delete-btn"
+            @click=${this.handleDelete}
+            aria-label="Delete todo">
+            Delete
+          &lt;/button>
+        &lt;/button-group>
+      &lt;/div>
+    `;
+  }
+}
+
+customElements.define('todo-item', TodoItem);</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Mon Nov 10 2025 03:33:49 GMT-0800 (Pacific Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

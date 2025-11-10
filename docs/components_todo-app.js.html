@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>components/todo-app.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="StorageService.html">StorageService</a><ul class='methods'><li data-type='method'><a href="StorageService.html#clear">clear</a></li><li data-type='method'><a href="StorageService.html#load">load</a></li><li data-type='method'><a href="StorageService.html#remove">remove</a></li><li data-type='method'><a href="StorageService.html#save">save</a></li></ul></li><li><a href="TodoApp.html">TodoApp</a><ul class='methods'><li data-type='method'><a href="TodoApp.html#handleAddTodo">handleAddTodo</a></li><li data-type='method'><a href="TodoApp.html#handleClearAll">handleClearAll</a></li><li data-type='method'><a href="TodoApp.html#handleClearCompleted">handleClearCompleted</a></li><li data-type='method'><a href="TodoApp.html#handleDeleteTodo">handleDeleteTodo</a></li><li data-type='method'><a href="TodoApp.html#handleToggleTodo">handleToggleTodo</a></li><li data-type='method'><a href="TodoApp.html#handleUpdateDueDate">handleUpdateDueDate</a></li><li data-type='method'><a href="TodoApp.html#handleUpdateImportance">handleUpdateImportance</a></li><li data-type='method'><a href="TodoApp.html#handleUpdateTodo">handleUpdateTodo</a></li><li data-type='method'><a href="TodoApp.html#render">render</a></li></ul></li><li><a href="TodoForm.html">TodoForm</a><ul class='methods'><li data-type='method'><a href="TodoForm.html#handleInput">handleInput</a></li><li data-type='method'><a href="TodoForm.html#handleSubmit">handleSubmit</a></li><li data-type='method'><a href="TodoForm.html#render">render</a></li></ul></li><li><a href="TodoItem.html">TodoItem</a><ul class='methods'><li data-type='method'><a href="TodoItem.html#handleCancel">handleCancel</a></li><li data-type='method'><a href="TodoItem.html#handleDateChange">handleDateChange</a></li><li data-type='method'><a href="TodoItem.html#handleDelete">handleDelete</a></li><li data-type='method'><a href="TodoItem.html#handleEdit">handleEdit</a></li><li data-type='method'><a href="TodoItem.html#handleImportanceChange">handleImportanceChange</a></li><li data-type='method'><a href="TodoItem.html#handleKeyDown">handleKeyDown</a></li><li data-type='method'><a href="TodoItem.html#handleSave">handleSave</a></li><li data-type='method'><a href="TodoItem.html#handleToggle">handleToggle</a></li><li data-type='method'><a href="TodoItem.html#render">render</a></li></ul></li><li><a href="TodoItem_TodoItem.html">TodoItem</a></li><li><a href="TodoList.html">TodoList</a><ul class='methods'><li data-type='method'><a href="TodoList.html#render">render</a></li></ul></li><li><a href="TodoList_TodoList.html">TodoList</a></li><li><a href="TodoModel.html">TodoModel</a><ul class='methods'><li data-type='method'><a href="TodoModel.html#addTodo">addTodo</a></li><li data-type='method'><a href="TodoModel.html#clearAll">clearAll</a></li><li data-type='method'><a href="TodoModel.html#clearCompleted">clearCompleted</a></li><li data-type='method'><a href="TodoModel.html#deleteTodo">deleteTodo</a></li><li data-type='method'><a href="TodoModel.html#notify">notify</a></li><li data-type='method'><a href="TodoModel.html#save">save</a></li><li data-type='method'><a href="TodoModel.html#subscribe">subscribe</a></li><li data-type='method'><a href="TodoModel.html#toggleComplete">toggleComplete</a></li><li data-type='method'><a href="TodoModel.html#uncheckAllRemaining">uncheckAllRemaining</a></li><li data-type='method'><a href="TodoModel.html#updateDueDate">updateDueDate</a></li><li data-type='method'><a href="TodoModel.html#updateImportance">updateImportance</a></li><li data-type='method'><a href="TodoModel.html#updateTodo">updateTodo</a></li></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">components/todo-app.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { LitElement, html, css } from 'lit';
+import { TodoModel } from '../models/todo-model.js';
+import { StorageService } from '../services/storage-service.js';
+import './todo-form.js';
+import './todo-list.js';
+
+/**
+ * TodoApp - Main application component
+ * Coordinates between Model and View components
+ */
+export class TodoApp extends LitElement {
+  static properties = {
+    todos: { state: true }
+  };
+
+  static styles = css`
+    :host {
+      display: block;
+    }
+
+    .app-container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      padding: 32px;
+      min-height: 400px;
+    }
+
+    h1 {
+      margin: 0 0 8px 0;
+      color: #333;
+      font-size: 32px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      background: #f5f5f5;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: #667eea;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    button {
+      flex: 1;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .clear-completed {
+      background: #ff9800;
+      color: white;
+    }
+
+    .clear-completed:hover {
+      background: #f57c00;
+    }
+
+    .clear-all {
+      background: #f44336;
+      color: white;
+    }
+
+    .clear-all:hover {
+      background: #da190b;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .footer {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #e0e0e0;
+      text-align: center;
+      color: #666;
+      font-size: 12px;
+    }
+  `;
+  /**
+   * Creates an instance of TodoApp
+   * Initializes storage service, model, and subscribes to model changes
+   * 
+   * @constructor
+   */
+  constructor() {
+    super();
+    this.storageService = new StorageService();
+    this.model = new TodoModel(this.storageService);
+    this.todos = this.model.todos;
+
+    // Subscribe to model changes
+    this.model.subscribe(() => {
+      this.todos = [...this.model.todos];
+    });
+  }
+  /**
+   * Handles the add-todo event from the form
+   * 
+   * @param {CustomEvent} e - Event containing the new todo text in detail.text
+   */
+  handleAddTodo(e) {
+    this.model.addTodo(e.detail.text);
+  }
+  /**
+   * Handles the toggle-todo event to mark a todo as complete/incomplete
+   * 
+   * @param {CustomEvent} e - Event containing the todo id in detail.id
+   */
+  handleToggleTodo(e) {
+    this.model.toggleComplete(e.detail.id);
+  }
+  /**
+   * Handles the delete-todo event to remove a todo
+   * 
+   * @param {CustomEvent} e - Event containing the todo id in detail.id
+   */
+  handleDeleteTodo(e) {
+    this.model.deleteTodo(e.detail.id);
+  }
+  /**
+   * Handles the update-todo event to modify a todo's text
+   * 
+   * @param {CustomEvent} e - Event containing the todo id and new text in detail
+   */
+  handleUpdateTodo(e) {
+    this.model.updateTodo(e.detail.id, e.detail.text);
+  }
+  /**
+   * Handles clearing all completed todos
+   * Shows confirmation dialog and unchecks all remaining todos
+   */
+  handleClearCompleted() {
+    if (confirm('Clear all completed todos?')) {
+      this.model.clearCompleted();
+      this.model.uncheckAllRemaining();
+    }
+  }
+  /**
+   * Handles the update-due-date event to set a todo's due date
+   * 
+   * @param {CustomEvent} e - Event containing the todo id and due date in detail
+   */
+  handleUpdateDueDate(e) {
+    this.model.updateDueDate(e.detail.id, e.detail.dueDate);
+  }
+  /**
+   * Handles the update-importance event to set a todo's importance level
+   * 
+   * @param {CustomEvent} e - Event containing the todo id and importance level in detail
+   */
+  handleUpdateImportance(e) {
+    this.model.updateImportance(e.detail.id, e.detail.importance);
+  }
+  /**
+   * Handles clearing all todos
+   * Shows confirmation dialog before deleting all items
+   */
+  handleClearAll() {
+    if (confirm('Clear ALL todos? This cannot be undone.')) {
+      this.model.clearAll();
+    }
+  }
+  /**
+   * Renders the component template
+   * 
+   * @returns {TemplateResult} The lit-html template
+   */
+  render() {
+    return html`
+      &lt;div class="app-container">
+        &lt;h1>My Tasks&lt;/h1>
+        &lt;p class="subtitle">Stay organized and productive&lt;/p>
+
+        &lt;div class="stats">
+          &lt;div class="stat-item">
+            &lt;div class="stat-value">${this.todos.length}&lt;/div>
+            &lt;div class="stat-label">Total&lt;/div>
+          &lt;/div>
+          &lt;div class="stat-item">
+            &lt;div class="stat-value">${this.model.activeCount}&lt;/div>
+            &lt;div class="stat-label">Active&lt;/div>
+          &lt;/div>
+          &lt;div class="stat-item">
+            &lt;div class="stat-value">${this.model.completedCount}&lt;/div>
+            &lt;div class="stat-label">Completed&lt;/div>
+          &lt;/div>
+        &lt;/div>
+
+        &lt;todo-form
+          @add-todo=${this.handleAddTodo}>
+        &lt;/todo-form>
+
+        &lt;todo-list
+          .todos=${this.todos}
+          @toggle-todo=${this.handleToggleTodo}
+          @delete-todo=${this.handleDeleteTodo}
+          @update-todo=${this.handleUpdateTodo}
+          @update-due-date=${this.handleUpdateDueDate}
+          @update-importance=${this.handleUpdateImportance}>
+        &lt;/todo-list>
+
+        &lt;div class="actions">
+          &lt;button
+            class="clear-completed"
+            @click=${this.handleClearCompleted}
+            ?disabled=${this.model.completedCount === 0}>
+            Clear Completed
+          &lt;/button>
+          &lt;button
+            class="clear-all"
+            @click=${this.handleClearAll}
+            ?disabled=${this.todos.length === 0}>
+            Clear All
+          &lt;/button>
+        &lt;/div>
+
+        &lt;div class="footer">
+          Lab 9: The final battle!
+        &lt;/div>
+      &lt;/div>
+    `;
+  }
+}
+
+customElements.define('todo-app', TodoApp);</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Mon Nov 10 2025 03:33:49 GMT-0800 (Pacific Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

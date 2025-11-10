@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="StorageService.html">StorageService</a><ul class='methods'><li data-type='method'><a href="StorageService.html#clear">clear</a></li><li data-type='method'><a href="StorageService.html#load">load</a></li><li data-type='method'><a href="StorageService.html#remove">remove</a></li><li data-type='method'><a href="StorageService.html#save">save</a></li></ul></li><li><a href="TodoApp.html">TodoApp</a><ul class='methods'><li data-type='method'><a href="TodoApp.html#handleAddTodo">handleAddTodo</a></li><li data-type='method'><a href="TodoApp.html#handleClearAll">handleClearAll</a></li><li data-type='method'><a href="TodoApp.html#handleClearCompleted">handleClearCompleted</a></li><li data-type='method'><a href="TodoApp.html#handleDeleteTodo">handleDeleteTodo</a></li><li data-type='method'><a href="TodoApp.html#handleToggleTodo">handleToggleTodo</a></li><li data-type='method'><a href="TodoApp.html#handleUpdateDueDate">handleUpdateDueDate</a></li><li data-type='method'><a href="TodoApp.html#handleUpdateImportance">handleUpdateImportance</a></li><li data-type='method'><a href="TodoApp.html#handleUpdateTodo">handleUpdateTodo</a></li><li data-type='method'><a href="TodoApp.html#render">render</a></li></ul></li><li><a href="TodoForm.html">TodoForm</a><ul class='methods'><li data-type='method'><a href="TodoForm.html#handleInput">handleInput</a></li><li data-type='method'><a href="TodoForm.html#handleSubmit">handleSubmit</a></li><li data-type='method'><a href="TodoForm.html#render">render</a></li></ul></li><li><a href="TodoItem.html">TodoItem</a><ul class='methods'><li data-type='method'><a href="TodoItem.html#handleCancel">handleCancel</a></li><li data-type='method'><a href="TodoItem.html#handleDateChange">handleDateChange</a></li><li data-type='method'><a href="TodoItem.html#handleDelete">handleDelete</a></li><li data-type='method'><a href="TodoItem.html#handleEdit">handleEdit</a></li><li data-type='method'><a href="TodoItem.html#handleImportanceChange">handleImportanceChange</a></li><li data-type='method'><a href="TodoItem.html#handleKeyDown">handleKeyDown</a></li><li data-type='method'><a href="TodoItem.html#handleSave">handleSave</a></li><li data-type='method'><a href="TodoItem.html#handleToggle">handleToggle</a></li><li data-type='method'><a href="TodoItem.html#render">render</a></li></ul></li><li><a href="TodoItem_TodoItem.html">TodoItem</a></li><li><a href="TodoList.html">TodoList</a><ul class='methods'><li data-type='method'><a href="TodoList.html#render">render</a></li></ul></li><li><a href="TodoList_TodoList.html">TodoList</a></li><li><a href="TodoModel.html">TodoModel</a><ul class='methods'><li data-type='method'><a href="TodoModel.html#addTodo">addTodo</a></li><li data-type='method'><a href="TodoModel.html#clearAll">clearAll</a></li><li data-type='method'><a href="TodoModel.html#clearCompleted">clearCompleted</a></li><li data-type='method'><a href="TodoModel.html#deleteTodo">deleteTodo</a></li><li data-type='method'><a href="TodoModel.html#notify">notify</a></li><li data-type='method'><a href="TodoModel.html#save">save</a></li><li data-type='method'><a href="TodoModel.html#subscribe">subscribe</a></li><li data-type='method'><a href="TodoModel.html#toggleComplete">toggleComplete</a></li><li data-type='method'><a href="TodoModel.html#uncheckAllRemaining">uncheckAllRemaining</a></li><li data-type='method'><a href="TodoModel.html#updateDueDate">updateDueDate</a></li><li data-type='method'><a href="TodoModel.html#updateImportance">updateImportance</a></li><li data-type='method'><a href="TodoModel.html#updateTodo">updateTodo</a></li></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+    <section class="package">
+        <h3> </h3>		
+    </section>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    <section class="readme usertext">
+        <article><h1>Lab 9: Reclaiming a &quot;Brown Field&quot; and Final Tooling Practice</h1>
+<h2>Learning Objectives</h2>
+<ul>
+<li>Take exiting brownfield code (in this case AI-generated) and make it your own by adding quality testing, docs, and modifications to suit you.</li>
+<li>Work with dependencies and new tech thrown at you for &quot;reasons&quot; in this case Lit and Vite</li>
+<li>Set up and use GitHub Actions for continuous integration and deployment</li>
+<li>Organize a repository to develop your own style</li>
+<li>Employ unit tests and E2E tests to ensure quality</li>
+<li>Use JSDocs to add type checking and documentation generation</li>
+<li>Use Github issues to track your work.  This means you need to write something down before you do it!  Plan then code.</li>
+<li>You must add some of your own ideas that YOU think are useful or interesting to demonstrate creativity and ownership</li>
+</ul>
+<p>This is the <strong>final warm-up lab</strong> before your team project. Unlike previous labs that focused heavily on coding concepts, this lab is a final chance to practice and mostly reviews what you have already done in new context.  It is meant to also allow you a chance to experiment and practice on your own <strong>BEFORE</strong> you start working with others and doing something from scratch. The main new thing here is using GitHub actions and showing you can attempt some of our previous efforts in a new context.</p>
+<blockquote>
+<p>IMPORTANT: This lab is about developing professional habits. The code is intentionally simple and roughly works, but it is purposefully AI-generated and represents &quot;brown field&quot; code some might call AI slop that is in a bit of a poor state. The lab allows you to practice dealing with such code and putting all the things you have already done together to derisk this approach.  You may have done this already, but now you aren't the one generating it.
+These skills will be critical for your upcoming project work and likely your career beyond by the looks of things so take the time by yourself to do the best you can.  This is the most subjective of the labs, but as such it will be the most lenient on grading.  Effort is what I need to see here so that you derisk the project which we spend our final ~6 weeks working on.</p>
+</blockquote>
+<h2>Lab Overview</h2>
+<p>You have been given this simple <strong>Task Management Application</strong> using Lit web components that demonstrate:</p>
+<ul>
+<li>Modern web component architecture</li>
+<li>Clean MVC separation</li>
+<li>localStorage persistence</li>
+<li>Responsive design</li>
+<li>Accessibility features</li>
+</ul>
+<p>However, it was vibed and as such likely could be a hot mess.  It has a few unit tests, it has limited docs, linting was implemented, e2e testing is not there, and visually it looks pretty bad.  Who knows how bad the code could be!  I didn't look, but you will!</p>
+<p>Your job is get this slop code in your repo <code>lab9-the-final-warmup</code> and bring everything you can think of to clean this &quot;pretty much done&quot; code to a better state.  Obvious things include:</p>
+<ul>
+<li>repo organization</li>
+<li>refactored and linted code</li>
+<li>unit test covered code</li>
+<li>e2e tested code</li>
+<li>JSDocs with doc generation</li>
+<li>ADRs documenting the choice of why one might use Lit or maybe we shouldn't use it!</li>
+</ul>
+<blockquote>
+<p>You likely have no idea what Lit does. You'll need to research it and compare it to what you have done.  Given our industry is throwing many things at us, we have to be comfortable seeing depedencies introduced and getting comfortable with them.  This one is purposefully much easier to contend with than, say, Vue or React!  Imagine getting generated code for something that is much farther from the web components and basic JS we have done!</p>
+</blockquote>
+<ul>
+<li>A pipeline that runs tests, docs, linting, etc. with Github actions when you push and deploys to either Cloudflare, Netlify, or other host as you see fit</li>
+<li>As always you must provide proof you are using Github issues to track your progress and Git to track your changes</li>
+<li>A readme linking to your deployed site, so I can see it work and know you are ready to build something of your own</li>
+</ul>
+<h2>Rubric</h2>
+<h3>GitHub Workflow &amp; Process (60 points)</h3>
+<p>The least prescriptive of all the tasks this effort and outcome based.  You get up to 20 points if you turn in something that works and does the bare minimum of having linting, unit testing, and deployment with little refactor.  You get up to 40 points if you turn in something that adds in e2e, docs, and does some refactor.  You get up to 60 points if this is now your code.   Your code means you have applied most if not all the previous concepts like good commit messages, use issues, tag versions, have testing, can generate docs, and it can do some things you decided YOU wanted to do out of personal interest.  To get those precious points your readme should advise me of all that.  Being the lazy technical leader I am I have no time to dig through your code, you better tell me what you did!</p>
+<hr>
+<h2>Submission</h2>
+<p>Submit your GitHub repository URL that demonstrates with a README that clearly points to your deployed TODO.</p>
+<p>Good luck! Remember to focus on process more than code. The lab is also intentionally vague as your final warm-up before we wrestle with <strong>REAL</strong> uncertainty!  You are free to ask me for advice about ideas you have, things you might do to show ownership, etc. Who knows that might be an actual learning outcome.</p>
+<h2>Issues</h2>
+<ul>
+<li>In every components/....js doc, all of the styling is within each file. My hope is to seperate the styling into its own .css file.</li>
+<li>There aren't and JSDoc comments; will add those for functions.</li>
+<li>When running the program, it seems that the clearing aspect doesn't properly work.</li>
+<li>Focus on MVC, making sure things are seperated properly.</li>
+<li>Features: Due date that ranks the todo list based on urgency. Maybe also an importance level</li>
+</ul>
+<h2>Project Structure</h2>
+<pre class="prettyprint source"><code>|-src  
+| |-components 
+| | |-todo-app.js
+| | |-todo-form.js
+| | |-todo-item.js
+| | |_todo-list.js
+| |-models
+| | |_todo-model.js
+| |-services
+| | |_storage-service.js
+| |-index.html
+| |_styles.css
+|-tests
+| |_todo-model.test.js
+|-.gitignore
+|-lab9.md
+|-package-lock.json
+|-package.json
+|-vite.config.js
+</code></pre>
+<h2>Netlify Website</h2>
+<p>https://lab9-final.netlify.app/</p>
+<h2>Issues</h2>
+<p>It took me so long to figure out SonarCloud. I decided to use SonarCloud because it</p></article>
+    </section>
+
+
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Mon Nov 10 2025 03:33:49 GMT-0800 (Pacific Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

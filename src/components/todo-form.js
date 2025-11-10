@@ -127,11 +127,7 @@ export class TodoForm extends LitElement {
           autofocus
         />
 
-        <select id="order-select">
-          <option value="Sort-by">Sort by</option>
-          <option value="Due-date" selected>Due Date</option>
-          <option value="Importance">Importance</option>
-        </select>
+        
         <button type="submit" ?disabled=${!this.inputValue.trim()}>
           Add
         </button>

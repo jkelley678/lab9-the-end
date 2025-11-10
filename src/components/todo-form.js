@@ -112,7 +112,6 @@ export class TodoForm extends LitElement {
   }
   /**
    * Renders the component template
-   * 
    * @returns {TemplateResult} The lit-html template
    */
   render() {
@@ -126,8 +125,6 @@ export class TodoForm extends LitElement {
           aria-label="New todo"
           autofocus
         />
-
-        
         <button type="submit" ?disabled=${!this.inputValue.trim()}>
           Add
         </button>
@@ -135,5 +132,4 @@ export class TodoForm extends LitElement {
     `;
   }
 }
-
 customElements.define('todo-form', TodoForm);

@@ -96,5 +96,3 @@ Good luck! Remember to focus on process more than code. The lab is also intentio
 ## Netlify Website
 https://lab9-final.netlify.app/
 
-## Issues
-It took me so long to figure out SonarCloud. I decided to use SonarCloud because it 
